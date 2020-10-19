@@ -30,6 +30,10 @@
   <link rel="stylesheet" href="{{asset('public/Backend')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('public/Backend')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{asset('public/Backend')}}/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{asset('public/Backend')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 <!-- jQuery -->
 <script src="{{asset('public/Backend')}}/plugins/jquery/jquery.min.js"></script>
 
@@ -239,6 +243,9 @@
 {{-- Sweat alert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<!-- Select2 -->
+<script src="{{asset('public/Backend')}}/plugins/select2/js/select2.full.min.js"></script>
+
 
 <!-- Page specific script -->
 <script>
@@ -297,6 +304,13 @@
       reader.readAsDataURL(e.target.files['0']);
     });
   });
+</script>
+
+<script type="text/javascript">
+
+  //Initialize Select2 Elements
+  $('.select2').select2()
+  
 </script>
 
 

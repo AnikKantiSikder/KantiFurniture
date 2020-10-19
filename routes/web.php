@@ -18,6 +18,12 @@ Route::get('/about-us', 'Frontend\FrontendController@aboutUs')->name('about.us')
 Route::get('/contact-us', 'Frontend\FrontendController@contactUs')->name('contact.us');
 Route::post('/contact-store', 'Frontend\FrontendController@storeContact')->name('contact.store');
 Route::get('/shopping-cart', 'Frontend\FrontendController@shoppingCart')->name('shopping.cart');
+Route::get('/product-list', 'Frontend\FrontendController@productList')->name('product.list');
+Route::get('/product-category/{category_id}', 'Frontend\FrontendController@categoryWiseProduct')
+		   ->name('category.wise.product');
+Route::get('/product-brand/{brand_id}', 'Frontend\FrontendController@brandWiseProduct')
+		   ->name('brand.wise.product');
+Route::get('/product-details/{slug}', 'Frontend\FrontendController@productDetails')->name('product.details.info');
 
 
 //Manage user routes-------------------------------------------------------------------
@@ -134,6 +140,52 @@ Route::prefix('brands')->group(function(){
 	Route::get('/edit/{id}','Backend\BrandController@edit')->name('brands.edit');
 	Route::post('/update/{id}','Backend\BrandController@update')->name('brands.update');
 	Route::get('/delete/{id}','Backend\BrandController@delete')->name('brands.delete');
+	
+
+});
+
+
+//Manage brand routes-----------------------------------------------------------------
+
+Route::prefix('colors')->group(function(){
+
+	Route::get('/view','Backend\ColorController@view')->name('colors.view');
+	Route::get('/add','Backend\ColorController@add')->name('colors.add');
+	Route::post('/store','Backend\ColorController@store')->name('colors.store');
+	Route::get('/edit/{id}','Backend\ColorController@edit')->name('colors.edit');
+	Route::post('/update/{id}','Backend\ColorController@update')->name('colors.update');
+	Route::get('/delete/{id}','Backend\ColorController@delete')->name('colors.delete');
+	
+
+});
+
+
+//Manage size routes-----------------------------------------------------------------
+
+Route::prefix('sizes')->group(function(){
+
+	Route::get('/view','Backend\SizeController@view')->name('sizes.view');
+	Route::get('/add','Backend\SizeController@add')->name('sizes.add');
+	Route::post('/store','Backend\SizeController@store')->name('sizes.store');
+	Route::get('/edit/{id}','Backend\SizeController@edit')->name('sizes.edit');
+	Route::post('/update/{id}','Backend\SizeController@update')->name('sizes.update');
+	Route::get('/delete/{id}','Backend\SizeController@delete')->name('sizes.delete');
+	
+
+});
+
+
+//Manage product routes-----------------------------------------------------------------
+
+Route::prefix('products')->group(function(){
+
+	Route::get('/view','Backend\ProductController@view')->name('products.view');
+	Route::get('/add','Backend\ProductController@add')->name('products.add');
+	Route::post('/store','Backend\ProductController@store')->name('products.store');
+	Route::get('/edit/{id}','Backend\ProductController@edit')->name('products.edit');
+	Route::post('/update/{id}','Backend\ProductController@update')->name('products.update');
+	Route::get('/delete/{id}','Backend\ProductController@delete')->name('products.delete');
+	Route::get('/details/{id}','Backend\ProductController@details')->name('products.details');
 	
 
 });

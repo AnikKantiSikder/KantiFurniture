@@ -201,4 +201,71 @@ $route= Route:: current()->getName();
 
 
 <!--Manage color-->
-          <li class="nav-item has-treeview {{($prefix=='/colors')?'m
+          <li class="nav-item has-treeview {{($prefix=='/colors')?'menu-open':''}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage color
+                <i class="fas fa-angle-left right"></i>
+                {{-- <span class="badge badge-info right">6</span> --}}
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('colors.view') }}" class="nav-link {{($route=='colors.view')?'active':''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View color</p>
+                </a>
+                
+              </li>
+            </ul>
+          </li>
+
+
+<!--Manage size-->
+          <li class="nav-item has-treeview {{($prefix=='/sizes')?'menu-open':''}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage size
+                <i class="fas fa-angle-left right"></i>
+                {{-- <span class="badge badge-info right">6</span> --}}
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('sizes.view') }}" class="nav-link {{($route=='sizes.view')?'active':''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View size</p>
+                </a>
+                
+              </li>
+            </ul>
+          </li>
+
+
+<!--Manage product-->
+          <li class="nav-item has-treeview {{($prefix=='/products')?'menu-open':''}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage product
+                <i class="fas fa-angle-left right"></i>
+                {{-- <span class="badge badge-info right">6</span> --}}
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('products.view') }}" class="nav-link {{($route=='products.view')?'active':''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View product</p>
+                </a>
+                
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+{{-- Sidebarmenu ends here --}}

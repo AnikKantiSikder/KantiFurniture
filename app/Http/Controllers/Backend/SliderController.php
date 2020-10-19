@@ -41,6 +41,8 @@ class SliderController extends Controller
     		$filename= date('YmdHi').$file->getClientOriginalName();
     		$file-> move(public_path('Upload/Slider_images'), $filename);
     		$data['image']= $filename;
+
+            
     	}
 
     	// return response()->json($data);
