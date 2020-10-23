@@ -1,4 +1,4 @@
-
+ 
 @extends('Frontend.Layouts.master')
 	@section('content')
 
@@ -84,8 +84,8 @@
 							<img src="{{ url('public/Upload/Product_images/'.$product->image)}}" 
 							alt="IMG-PRODUCT" style="height: 250px;width: 300px;">
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Add to Card
+							<a href="{{ route('product.details.info',$product->slug) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								Add to Cart
 							</a>
 						</div>
 

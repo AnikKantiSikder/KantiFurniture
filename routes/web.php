@@ -4,13 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//Frontend routes---------------------------------------------------------------------------------
 
 Route::get('/', 'Frontend\FrontendController@index');
 
@@ -25,8 +19,26 @@ Route::get('/product-brand/{brand_id}', 'Frontend\FrontendController@brandWisePr
 		   ->name('brand.wise.product');
 Route::get('/product-details/{slug}', 'Frontend\FrontendController@productDetails')->name('product.details.info');
 
+//Shopping cart
+Route::post('/add-to-cart', 'Frontend\CartController@addToCart')->name('cart.insert');
+Route::get('/show-cart', 'Frontend\CartController@showCart')->name('cart.show');
+Route::post('/update-cart', 'Frontend\CartController@updateCart')->name('cart.update');
+Route::get('/delete-cart/{rowId}', 'Frontend\CartController@deleteCart')->name('cart.delete');
 
-//Manage user routes-------------------------------------------------------------------
+//Customer dashboard(log in/signup)
+Route::get('/customer-login', 'Frontend\CheckoutController@customerLogin')->name('customer.login');
+Route::get('/customer-signup', 'Frontend\CheckoutController@customerSignup')->name('customer.signup');
+
+
+
+
+Auth::routes();
+
+//Backend routes-------------------------------------------------------------------------------------
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Manage user routes
 
 Route::prefix('users')->group(function(){
 
@@ -40,7 +52,7 @@ Route::prefix('users')->group(function(){
 });
 
 
-//Manage profile routes-----------------------------------------------------------------
+//Manage profile routes
 
 Route::prefix('profiles')->group(function(){
 
@@ -54,7 +66,7 @@ Route::prefix('profiles')->group(function(){
 
 
 
-//Logo management routes-----------------------------------------------------------------
+//Logo management routes
 
 Route::prefix('logos')->group(function(){
 
@@ -68,7 +80,7 @@ Route::prefix('logos')->group(function(){
 });
 
 
-//Slider management routes-----------------------------------------------------------------
+//Slider management routes
 
 Route::prefix('sliders')->group(function(){
 
@@ -84,7 +96,7 @@ Route::prefix('sliders')->group(function(){
 
 
 
-//Contact routes-----------------------------------------------------------------
+//Contact routes
 
 Route::prefix('contacts')->group(function(){
 
@@ -100,7 +112,7 @@ Route::prefix('contacts')->group(function(){
 
 });
 
-//About us routes-----------------------------------------------------------------
+//About us routes
 
 Route::prefix('abouts')->group(function(){
 
@@ -115,7 +127,7 @@ Route::prefix('abouts')->group(function(){
 });
 
 
-//Manage category routes-----------------------------------------------------------------
+//Manage category routes
 
 Route::prefix('categories')->group(function(){
 
@@ -130,7 +142,7 @@ Route::prefix('categories')->group(function(){
 });
 
 
-//Manage brand routes-----------------------------------------------------------------
+//Manage brand routes
 
 Route::prefix('brands')->group(function(){
 
@@ -145,7 +157,7 @@ Route::prefix('brands')->group(function(){
 });
 
 
-//Manage brand routes-----------------------------------------------------------------
+//Manage brand routes
 
 Route::prefix('colors')->group(function(){
 
@@ -160,7 +172,7 @@ Route::prefix('colors')->group(function(){
 });
 
 
-//Manage size routes-----------------------------------------------------------------
+//Manage size routes
 
 Route::prefix('sizes')->group(function(){
 
@@ -175,7 +187,7 @@ Route::prefix('sizes')->group(function(){
 });
 
 
-//Manage product routes-----------------------------------------------------------------
+//Manage product routes
 
 Route::prefix('products')->group(function(){
 

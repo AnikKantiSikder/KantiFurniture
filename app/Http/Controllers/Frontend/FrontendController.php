@@ -10,6 +10,9 @@ use App\Model\Contact;
 use App\Model\About;
 use App\Model\Communicate;
 use App\Model\Product;
+use App\Model\ProductSubImage;
+use App\Model\ProductColor;
+use App\Model\ProductSize;
 use Mail;
 
 class FrontendController extends Controller
@@ -23,15 +26,16 @@ class FrontendController extends Controller
 
 		$data['logo']= Logo::first();
 		$data['sliders']= Slider::all();
+		$data['contact']= Contact::first();
 		$data['categories']= Product::select('category_id')->groupBy('category_id')->get();
 		$data['brands']= Product::select('brand_id')->groupBy('brand_id')->get();
 		$data['products']= Product::orderBy('id','desc')->paginate(8);
-		$data['contact']= Contact::first();
+		
 
 		return view('Frontend.Layouts.home', $data);
 	}
 
-	//Productt list
+	//Product list
 	public function productList(){
 
 		$data['logo']= Logo::first();
@@ -72,6 +76,11 @@ class FrontendController extends Controller
 	    $data['logo']= Logo::first();
 		$data['contact']= Contact::first();
 		$data['product']= Product::where('slug', $slug)->first();
+
+		$data['product_sub_images']= ProductSubImage::where('product_id', $data['product']->id)->get();
+		$data['product_colors']= ProductColor::where('product_id', $data['product']->id)->get();
+		$data['product_sizes']= ProductSize::where('product_id', $data['product']->id)->get();
+
 
 		return view('Frontend.SinglePages.product_details', $data);	
 	}
@@ -129,8 +138,9 @@ class FrontendController extends Controller
 
 	//Shopping cart
 	public function shoppingCart(){
-
-		return view('Frontend.SinglePages.shopping_cart');
+        $data['logo']= Logo::first();
+		$data['contact']= Contact::first();
+		return view('Frontend.SinglePages.shopping_cart', $data);
 	}
 
 

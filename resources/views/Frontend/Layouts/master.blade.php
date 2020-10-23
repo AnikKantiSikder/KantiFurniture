@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Popularsoft E-Commerce</title>
+	<title>Kanti furniture</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
@@ -20,6 +20,15 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('public/Frontend')}}/vendor/perfect-scrollbar/perfect-scrollbar.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('public/Frontend')}}/css/util.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('public/Frontend')}}/css/main.css">
+	<script src="{{asset('public/Frontend')}}/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!-- Notify js -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+    <style type="text/css">
+	  .notify-corner{
+	    z-index: 10000 !important;
+	  }
+   </style>
+
 </head>
 <body class="animsition">
 
@@ -173,7 +182,6 @@
 	</div>
 
 
-	<script src="{{asset('public/Frontend')}}/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="{{asset('public/Frontend')}}/vendor/animsition/js/animsition.min.js"></script>
 	<script src="{{asset('public/Frontend')}}/vendor/bootstrap/js/popper.js"></script>
 	<script src="{{asset('public/Frontend')}}/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -272,6 +280,22 @@
 	</script>
 
 	<script src="{{asset('public/Frontend')}}/js/main.js"></script>
+
+	@if(session()->has('success'))
+	    <script type="text/javascript">
+	      $(function(){
+	        $.notify("{{session()->get('success')}}", {globalPosition:'top right', className:'success'});
+	      });
+	    </script>
+	  @endif
+
+	  @if(session()->has('error'))
+	    <script type="text/javascript">
+	      $(function(){
+	        $.notify("{{session()->get('error')}}", {globalPosition:'top right', className:'error'});
+	      });
+	    </script>
+	 @endif
 
 </body>
 </html>

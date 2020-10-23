@@ -17,20 +17,21 @@
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-dots"></div>
-							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div> 
 
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+								@foreach ($product_sub_images as $img)
+									<div class="item-slick3"data-thumb="{{ url('public/Upload/Product_images/Product_sub_images/'.$img->sub_image) }}">
+									   <div class="wrap-pic-w pos-relative">
+										<img src="{{ url('public/Upload/Product_images/Product_sub_images/'.$img->sub_image) }}" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ url('public/Upload/Product_images/Product_sub_images/'.$img->sub_image) }}">
 											<i class="fa fa-expand"></i>
 										</a>
-									</div>
-								</div>
+									    </div>
+								    </div>
+								@endforeach
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -49,66 +50,82 @@
 							{{$product->short_desc}}
 						</p>
 						
-						<!--  -->
+						<!-- Add to cart -->
 						<div class="p-t-33">
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Size
-								</div>
 
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
-										</select>
-										<div class="dropDownSelect2"></div>
+							<form method="POST" action="{{ route('cart.insert') }}">
+								@csrf
+
+								{{-- Passing product id into cart by a hidden input type --}}
+								<input type="hidden" name="id" value="{{$product->id}}">
+
+								<div class="flex-w flex-r-m p-b-10">
+									<div class="size-203 flex-c-m respon6">
+										Size
 									</div>
-								</div>
-							</div>
+									<div class="size-204 respon6-next">
+										<div class="rs1-select2 bor8 bg0">
+											<select class="js-select2" name="size_id">
 
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Color
-								</div>
+												<option value="">Select size</option>
 
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-							</div>
-
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
+												@foreach ($product_sizes as $size)
+													<option value="{{$size->size_id}}">{{$size['size']['name']}}</option>
+												@endforeach
+						
+											</select>
+											<div class="dropDownSelect2"></div>
+											<font style="color: red;">
+												{{($errors->has('size_id'))?($errors->first('size_id')):''}}
+											</font>
 										</div>
 									</div>
-
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</button>
 								</div>
-							</div>	
+
+								<div class="flex-w flex-r-m p-b-10">
+									<div class="size-203 flex-c-m respon6">
+										Color
+									</div>
+
+									<div class="size-204 respon6-next">
+										<div class="rs1-select2 bor8 bg0">
+											<select class="js-select2" name="color_id">
+												<option value="">Select color</option>
+												@foreach ($product_colors as $color)
+												    <option value="{{$color->color_id}}">{{$color['color']['name']}}</option>
+												@endforeach
+											</select>
+											<div class="dropDownSelect2"></div>
+											<font style="color: red;">
+												{{($errors->has('color_id'))?($errors->first('color_id')):''}}
+											</font>
+										</div>
+									</div>
+								</div>
+
+								<div class="flex-w flex-r-m p-b-10">
+									<div class="size-204 flex-w flex-m respon6-next">
+										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</div>
+
+											<input class="mtext-104 cl3 txt-center num-product" type="number"
+											name="qty" value="1">
+
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</div>
+										</div>
+
+										<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+											Add to cart
+										</button>
+									</div>
+								</div>
+							</form>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -170,7 +187,9 @@
 											</span>
 
 											<span class="stext-102 cl6 size-206">
-												Black, Blue, Grey, Green, Red, White
+												@foreach ($product_colors as $color)
+												    {{$color['color']['name']}} |
+												@endforeach
 											</span>
 										</li>
 
@@ -180,7 +199,9 @@
 											</span>
 
 											<span class="stext-102 cl6 size-206">
-												XL, L, M, S
+												@foreach ($product_sizes as $size)
+												    {{$size['size']['name']}} |
+												@endforeach
 											</span>
 										</li>
 									</ul>
