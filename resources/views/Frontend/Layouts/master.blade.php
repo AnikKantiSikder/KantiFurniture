@@ -223,6 +223,8 @@
 
 	<script src="{{asset('public/Frontend')}}/vendor/isotope/isotope.pkgd.min.js"></script>
 	<script src="{{asset('public/Frontend')}}/vendor/sweetalert/sweetalert.min.js"></script>
+	<!-- jquery-validation -->
+	<script src="{{asset('public/Backend')}}/plugins/jquery-validation/jquery.validate.min.js"></script>
 	
 	<script>
 		$('.js-addwish-b2').on('click', function(e){

@@ -9,6 +9,7 @@
 			height: 42px;
 			border: 1px solid #e6e6e6;
 		}
+
 	</style>
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('public/Frontend/images/bg-01.jpg');">
@@ -23,16 +24,16 @@
 			<div class="row">
 				<div class="col-md-12 col-lg-12 col-xl-12" style="padding-bottom: 30px;">
 					<div class="wrap-table-shopping-cart">
-						<table class="table-shopping-cart">
+						<table class="table table-bordered">
 							<tr class="table_head">
-								<th class="column-1">Product</th>
-								<th class="column-2"></th>
-								<th class ="column-2">Size</th>
-								<th class="column-2">Color</th>
-								<th class="column-3">Price</th>
-								<th class="column-4">Quantity</th>
-								<th class="column-5">Total</th>
-								<th class="column-5">Action</th>
+								<th>Product</th>
+								<th>Image</th>
+								<th>Size</th>
+								<th>Color</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Total</th>
+								<th>Action</th>
 							</tr>
 
 							@php
@@ -42,17 +43,17 @@
 							@endphp
 							@foreach ($contents as $cartContent)
 							<tr class="table_row">
-								<td class="column-1">{{$cartContent->name}}</td>
-								<td class="column-2">
+								<td>{{$cartContent->name}}</td>
+								<td>
 									<div class="how-itemcart1">
 										<img src="{{asset('public/Upload/Product_images/'.$cartContent->options->image)}}" alt="IMG">
 									</div>
 								</td>
-								<td class="column-2">{{$cartContent->options->size_name}}</td>
-								<td class="column-2">{{$cartContent->options->color_name}}</td>
+								<td>{{$cartContent->options->size_name}}</td>
+								<td>{{$cartContent->options->color_name}}</td>
 								
-								<td class="column-3">{{$cartContent->price}} Tk</td>
-								<td class="column-4">
+								<td>{{$cartContent->price}} Tk</td>
+								<td style="width: 200px;min-width: 200px;">
 									{{-- Update product quantity in the cart --}}
 									<form method="POST" action="{{ route('cart.update') }}">
 										@csrf
@@ -64,8 +65,8 @@
 										</div>
 									</form>
 								</td>
-								<td class="column-5">{{$cartContent->subtotal}} Tk</td>
-								<td class="column-5">
+								<td>{{$cartContent->subtotal}} Tk</td>
+								<td>
 									<a href="{{ route('cart.delete',$cartContent->rowId) }}" class="btn btn-danger">
 										<i class="fa fa-times"></i>
 									</a>
@@ -75,10 +76,6 @@
 								$total+= $cartContent->subtotal;
 							@endphp
 							@endforeach
-
-
-
-
 						</table>
 					</div>
 				</div>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
     <style type="text/css">
@@ -99,6 +100,22 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                               <button type="button" class="close" data-dismiss="alert">&times;</button>
+                               @foreach ($errors->all() as $error)
+                                   <strong>{{$error}}</strong><br>
+                               @endforeach
+                               
+                            </div>
+                        @endif
+                        @if (Session::get('message'))
+                            <div class="alert alert-danger alert-dismissible">
+                               <button type="button" class="close" data-dismiss="alert">&times;</button>
+                               <strong>{{Session::get('message')}}</strong>
+                            </div>
+                        @endif
+
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
@@ -106,13 +123,13 @@
 
                             <input id="email" type="email" class="form-control @error('email')
                              is-invalid @enderror" name="email" value="{{ old('email') }}"
-                            required autocomplete="email" placeholder="Email" autofocus>
+                             autocomplete="email" placeholder="Email" autofocus>
 
-                            @error('email')
+                        {{--@error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
                             </span>
-                            @enderror
+                        @enderror --}}
 
                         </div>
 
@@ -122,14 +139,13 @@
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
 
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password" autocomplete="current-password">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" autocomplete="current-password">
 
-                            
-                            @error('password')
+                        {{--@error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
                             </span>
-                            @enderror
+                        @enderror --}}
 
                         </div>
 
