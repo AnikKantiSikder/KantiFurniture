@@ -51,12 +51,12 @@
                   
                     <div class="form-row">
                       <div class="col">
-                        <label for="formGroupExampleInput">Type</label>
+                        <label for="userrole">Type</label>
 
                         <select name="userrole" class="form-control">
-                          <option value="">Select role</option>
-                          <option value="Admin">Admin</option>
-                          <option value="User">User</option>
+                          <option value="">User role</option>
+                          <option value="admin">Admin</option>
+                          <option value="user">User</option>
                         </select>
 
                       </div>

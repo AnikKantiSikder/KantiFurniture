@@ -51,13 +51,13 @@
                   
                     <div class="form-row">
                       <div class="col">
-                        <label for="formGroupExampleInput">Type</label>
+                        <label for="userrole">User role</label>
 
                         <select name="userrole" class="form-control">
                           <option value="">Select role</option>
 
-                          <option value="Admin" {{($allData->user_type =="Admin")?"selected":""}} >Admin</option>
-                          <option value="User" {{($allData->user_type =="User")?"selected":""}}>User</option>
+                          <option value="admin" {{($allData->role =="Admin")?"selected":""}} >admin</option>
+                          <option value="user" {{($allData->role =="User")?"selected":""}}>user</option>
 
                         </select>
 

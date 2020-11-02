@@ -46,7 +46,17 @@
 	                            <a href="#">SHOPS</a>
 	                            <ul class="sub-menu">
 	                                <li><a href="{{ route('product.list') }}">Products</a></li>
-	                                <li><a href="">Checkout</a></li>
+
+	                            {{-- Checkout........................................................... --}}
+	                                @if (@Auth::user()->id !=NULL && Session::get('shipping_id') == NULL)
+	                                    <li><a href="{{ route('customer.checkout') }}">Checkout</a></li>
+	                                @elseif(@Auth::user()->id !=NULL && Session::get('shipping_id') != NULL)
+	                                    <li><a href="{{ route('customer.payment') }}">Checkout</a></li>
+	                                @else
+	                                	<li><a href="{{ route('customer.login') }}">Checkout</a></li>
+	                                @endif
+	                            {{-- Checkout............................................................ --}}
+
 	                                <li><a href="{{ route('shopping.cart') }}">Cart</a></li>
 	                            </ul>
 	                        </li>
@@ -63,9 +73,9 @@
 	                            <li class="active-menu">
 	                            <a href="#">ACCOUNTS</a>
 	                            <ul class="sub-menu">
-	                                <li><a href="">My dashboard</a></li>
-	                                <li><a href="">My profile</a></li>
-	                                <li><a href="">My orders</a></li>
+	                                <li><a href="{{ route('dashboard') }}">My profile</a></li>
+	                                <li><a href="{{ route('customer.password.change') }}">Password change</a></li>
+	                                <li><a href="{{ route('customer.order.list') }}">My orders</a></li>
 	                                <li>
 	                                	<a href="{{ route('logout') }}" onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">Log out
@@ -149,7 +159,15 @@
 					<a href="">SHOPS</a>
 					<ul class="sub-menu-m">
 						<li><a href="{{ route('product.list') }}">Products</a></li>
-                        <li><a href="">Checkout</a></li>
+					{{-- Checkout........................................................... --}}
+                        @if (@Auth::user()->id !=NULL && Session::get('shipping_id') == NULL)
+                            <li><a href="{{ route('customer.checkout') }}">Checkout</a></li>
+                        @elseif(@Auth::user()->id !=NULL && Session::get('shipping_id') != NULL)
+                            <li><a href="{{ route('customer.payment') }}">Checkout</a></li>
+                        @else
+                        	<li><a href="{{ route('customer.login') }}">Checkout</a></li>
+                        @endif
+	                {{-- Checkout............................................................ --}}
                         <li><a href="{{ route('shopping.cart') }}">Cart</a></li>
 					</ul>
 					<span class="arrow-main-menu-m">
@@ -167,9 +185,9 @@
                 	<li>
 					    <a href="">ACCOUNTS</a>
 					    <ul class="sub-menu-m">
-							<li><a href="">My dashboard</a></li>
-	                        <li><a href="">My profile</a></li>
-	                        <li><a href="">My orders</a></li>
+							<li><a href="{{ route('dashboard') }}">My profile</a></li>
+	                        <li><a href="{{ route('customer.password.change') }}">Password change</a></li>
+	                        <li><a href="{{ route('customer.order.list') }}">My orders</a></li>
                     	    <li>
                             	<a href="{{ route('logout') }}" onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">Log out
@@ -263,7 +281,7 @@
 							View Cart
 						</a>
 
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						<a href="{{ route('customer.login') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
 					</div>

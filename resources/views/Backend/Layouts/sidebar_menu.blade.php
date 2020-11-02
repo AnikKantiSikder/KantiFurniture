@@ -12,7 +12,7 @@ $route= Route:: current()->getName();
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
 <!-- Manage user -->
-        @if(Auth::user()->user_type=='Admin')
+        @if(Auth::user()->role=='admin')
           <li class="nav-item has-treeview {{($prefix=='/users')?'menu-open':''}}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -289,6 +289,35 @@ $route= Route:: current()->getName();
                 </a>
               </li>
               <li class="nav-item"> <br><br> </li>
+
+            </ul>
+          </li>
+
+<!--Manage order-->
+          <li class="nav-item has-treeview {{($prefix=='/orders')?'menu-open':''}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage orders
+                <i class="fas fa-angle-left right"></i>
+                {{-- <span class="badge badge-info right">6</span> --}}
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{ route('orders.pending.list') }}" class="nav-link {{($route=='orders.pending.list')?'active':''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pending orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('orders.approved.list') }}" class="nav-link {{($route=='orders.approved.list')?'active':''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Approved orders</p>
+                </a>
+              </li>
+              <li class="nav-item"> <br><br><br><br></li>
 
             </ul>
           </li>

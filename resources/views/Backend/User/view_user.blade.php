@@ -51,7 +51,7 @@
                           <th>SL.</th>
                           <th>Name</th>
                           <th>Email</th>
-                          <th>Role</th>
+                          <th>User type</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -63,7 +63,7 @@
                         <td> {{$key+1}} </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->user_type}}</td>
+                        <td>{{$user->role}}</td>
                         <td>
                           <a title="Edit" class="btn btn-sm btn-info"
                           href="{{ route('users.edit', $user->id) }}">

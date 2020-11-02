@@ -25,20 +25,37 @@ Route::get('/show-cart', 'Frontend\CartController@showCart')->name('cart.show');
 Route::post('/update-cart', 'Frontend\CartController@updateCart')->name('cart.update');
 Route::get('/delete-cart/{rowId}', 'Frontend\CartController@deleteCart')->name('cart.delete');
 
-//Customer(log in/signup)
+//Customer(log in/signup/billing system)
 Route::get('/customer-login', 'Frontend\CheckoutController@customerLogin')->name('customer.login');
 Route::get('/customer-signup', 'Frontend\CheckoutController@customerSignup')->name('customer.signup');
 Route::post('/customer-signup-store', 'Frontend\CheckoutController@signupStore')->name('signup.store');
 Route::get('/customer-email-verify', 'Frontend\CheckoutController@emailVerify')->name('email.verify');
 Route::post('/verification-store', 'Frontend\CheckoutController@storeVerification')->name('store.verification');
+Route::get('/checkout', 'Frontend\CheckoutController@checkOut')->name('customer.checkout');
+Route::post('/checkout-store', 'Frontend\CheckoutController@checkoutStore')->name('customer.checkout.store');
 
 Auth::routes();
 
 //Customer dashboard
 Route::group(['middleware'=> ['auth','customer'] ], function(){
 
-	Route::get('/dashboard', 'Frontend\DashboardController@dashboard')->name('dashboard'); 
+	Route::get('/dashboard', 'Frontend\DashboardController@dashboard')->name('dashboard');
+	Route::get('/customer-edit-profile', 'Frontend\DashboardController@editProfile')->name('customer.edit.profile');
+	Route::post('/customer-update-profile', 'Frontend\DashboardController@updateProfile')
+	           ->name('customer.update.profile');
+	Route::get('/customer-password-change', 'Frontend\DashboardController@passwordChange')
+	           ->name('customer.password.change');
+	Route::post('/customer-password-update', 'Frontend\DashboardController@passwordUpdate')
+	           ->name('customer.password.update');
+	Route::get('/payment', 'Frontend\DashboardController@payment')->name('customer.payment');
+	Route::post('/payment-store', 'Frontend\DashboardController@paymentStore')->name('customer.payment.store');
+	Route::get('/order-list', 'Frontend\DashboardController@orderList')->name('customer.order.list');
+	Route::get('/order-details/{id}', 'Frontend\DashboardController@orderDetails')->name('customer.order.details');
 });
+
+
+
+
 
 //Backend routes-------------------------------------------------------------------------------------
 
@@ -220,6 +237,17 @@ Route::group(['middleware'=> ['auth','admin'] ], function(){
 		Route::get('/delete/{id}','Backend\CustomerController@delete')->name('customers.delete');
 		
 	});
+
+	//Manage orders routes
+
+	Route::prefix('orders')->group(function(){
+
+		Route::get('/pending/list','Backend\OrderController@pendingList')->name('orders.pending.list');
+		Route::get('/approved/list','Backend\OrderController@approvedList')->name('orders.approved.list');
+
+		
+	});
+
 
 });
 

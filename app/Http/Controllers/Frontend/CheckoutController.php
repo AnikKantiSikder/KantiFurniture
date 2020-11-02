@@ -15,10 +15,17 @@ use App\Model\ProductColor;
 use App\Model\ProductSize;
 use App\Model\Size;
 use App\Model\Color;
+use App\Model\Shipping;
+use App\Model\Payment;
+use App\Model\Order;
+use App\Model\OrderDetail;
 use Cart;
 use App\User;
 use DB;
 use Mail;
+use Auth;
+use Session;
+
 
 class CheckoutController extends Controller
 {
@@ -109,6 +116,37 @@ class CheckoutController extends Controller
         else{
             return redirect()->back()->with('error','Sorry! Email or verificaiton code does not match');
         }
+    }
+
+    //Customer checkout
+    public function checkout(){
+        $data['logo']= Logo::first();
+        $data['contact']= Contact::first();
+        return view('Frontend.SinglePages.customer_checkout', $data);
+    }
+
+    //Customer checkout store
+    public function checkoutStore(Request $request){
+        $this->validate($request, [
+            'name'=> 'required',
+            'mobile'=> 'required',
+            'address'=> 'required',
+        ]);
+
+        $checkout= new Shipping();
+
+        $checkout->user_id= Auth::user()->id;
+        $checkout->name= $request->name;
+        $checkout->email= $request->email;
+        $checkout->mobile= $request->mobile;
+        $checkout->address= $request->address;
+
+        $checkout->save();
+        Session::put('shipping_id', $checkout->id);
+
+        return redirect()->route('customer.payment')->with('success', 'Data saved successfully');
+
+
     }
 
 
