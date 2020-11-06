@@ -87,7 +87,9 @@
 										@endif
 									</td>
 									<td>
-										<a href="{{route('customer.order.details',$order->id)}}" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Details</a>
+										<a title="Details" href="{{route('customer.order.details',$order->id)}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+
+										<a title="Print" target="_blank" href="{{route('customer.order.print',$order->id)}}" class="btn btn-success btn-sm"><i class="fa fa-print"></i></a>
 									</td>
 								</tr>
 							@endforeach

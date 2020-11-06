@@ -27,7 +27,7 @@ use DB;
 class DashboardController extends Controller
 {
 
-    //View dashboard
+    //View customer dashboard
     public function dashboard(){
         
         $data['logo']= Logo::first();
@@ -206,6 +206,26 @@ class DashboardController extends Controller
             return view('Frontend.SinglePages.customer_order_details', $data);
         }
     }
+
+    //Customer order print
+    public function orderPrint($id){
+
+        $orderData= Order::find($id);
+        $data['order']= Order::where('id', $orderData->id)->where('user_id',Auth::user()->id)->first();
+
+
+        if ($data['order'] == false) {
+            return redirect()->back()->with('Error','Do not try to be oversmart');
+        }else{
+
+            $data['logo']= Logo::first();
+            $data['contact']= Contact::first();
+            $data['order']= Order::with(['order_details'])->where('id', $orderData->id)->where('user_id',Auth::user()->id)->first();
+            return view('Frontend.SinglePages.customer_order_print', $data);
+        }
+    }
+
+
 
 //Ends here
 }

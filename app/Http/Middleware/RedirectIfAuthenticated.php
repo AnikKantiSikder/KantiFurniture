@@ -23,10 +23,9 @@ class RedirectIfAuthenticated
             if(Auth::user()->user_type=='Admin'){
                 return redirect('/home');
             }
-            else if(Auth::user()->user_type=='customer'){
+            elseif(Auth::user()->user_type=='customer'){
                 return redirect('/dashboard');
             }
-            // return redirect(RouteServiceProvider::HOME);
         }
 
         return $next($request);

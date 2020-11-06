@@ -38,6 +38,7 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
+                      
                         <form id="login-form" class="form" action="{{ route('signup.store') }}" method="post">
                             @csrf
                             <h3 class="text-center text-info">Sign up</h3>

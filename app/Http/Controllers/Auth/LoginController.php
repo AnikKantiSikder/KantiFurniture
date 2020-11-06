@@ -11,17 +11,19 @@ use App\User;
 
 class LoginController extends Controller
 {
+
     public function login(Request $request){
 
         $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
+            'email'=> 'required',
+            'password'=> 'required'
         ]);
 
         $email= $request->email;
-        $password= $request->password;
+        $password= $request->password; 
 
         $validData= User::where('email', $email)->first();
+
         $passwordCheck= password_verify($password, @$validData->password); 
 
         if($passwordCheck == false){
@@ -34,6 +36,7 @@ class LoginController extends Controller
             return redirect()->route('login');
         }
     }
+
 
     use AuthenticatesUsers;
 

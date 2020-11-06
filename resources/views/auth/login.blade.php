@@ -96,6 +96,7 @@
                         <img src="{{asset('public/Frontend/images/logo1.png')}}" class="brand_logo" alt="Logo">
                     </div>
                 </div>
+                {{-- Start --}}
                 <div class="d-flex justify-content-center form_container">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
